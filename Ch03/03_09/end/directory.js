@@ -1,16 +1,16 @@
 (function() {
   "use strict";
 
-  Vue.component('directory-filters', {
-    data: function () {
+  Vue.component("directory-filters", {
+    data: function() {
       return {
         titles: window.LMDirectory.titles,
         search: {
-          name: '',
-          title: '',
+          name: "",
+          title: "",
           intern: false
         }
-      }
+      };
     },
     // custom, non-reactive data
     titles: window.LMDirectory.titles,
@@ -37,13 +37,13 @@
     </form>`,
     methods: {
       notifyFilterUpdate: function() {
-        this.$emit('filter-people', this.search);
+        this.$emit("filter-people", this.search);
       },
 
       resetFilters: function() {
         this.search = {
-          name: '',
-          title: '',
+          name: "",
+          title: "",
           intern: false
         };
 
@@ -52,11 +52,12 @@
     }
   });
 
-  Vue.component('directory-people', {
-    props: ['people'],
-    template: '<div class="results"> \
+  Vue.component("directory-people", {
+    props: ["people"],
+    template:
+      '<div class="results"> \
       <transition-group name="fade" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut"> \
-      <div class="person" v-for="person in people" v-bind:key="person.id"> \
+      <div class="person" v-for="person in people" :key="person.id"> \
       <h3>{{ person.name }}, {{ person.title }}</h3> \
       <p> \
       <img class="size-medium alignright" :src="person.img" :alt="person.name" \
@@ -69,23 +70,20 @@
   });
 
   var Directory = new Vue({
-    el: '#directory-root',
+    el: "#directory-root",
     data: {
       people: window.LMDirectory.people
     },
     methods: {
       updatePeopleList: function(params) {
-        this.people = window.LMDirectory.people.filter(
-          function(person) {
-            return (
-              (!params.intern || params.intern && person.intern) &&
-              (params.name === "" ||
-                person.name.toLowerCase().indexOf(params.name.toLowerCase()) !==
-                -1) &&
-              (params.title === "" || person.title_cat === params.title)
-            );
-          }
-        );
+        this.people = window.LMDirectory.people.filter(function(person) {
+          return (
+            (!params.intern || (params.intern && person.intern)) &&
+            (params.name === "" ||
+              person.name.toLowerCase().indexOf(params.name.toLowerCase()) !== -1) &&
+            (params.title === "" || person.title_cat === params.title)
+          );
+        });
       }
     }
   });
