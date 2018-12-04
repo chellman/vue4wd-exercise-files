@@ -115,14 +115,11 @@
 							<div class="customizer">
 								<div class="product-image">
 									<img src="../../../assets/red.jpg" alt="" />
-									<p class="product-caption">
-										Selected size: {{ selectedSize }}
-									</p>
 								</div>
 								<div class="selectors">
 									<div class="field-group">
 										<label for="size-options">Size:</label>
-										<select name="sizeOptions" id="size-options" v-model="selectedSize">
+										<select name="sizeOptions" id="size-options">
 											<option v-for="size in sizes">{{ size }}</option>
 										</select>
 									</div>

@@ -113,20 +113,23 @@
 						<!-- VUE COMPONENTS GO HERE -->
 						<div id="vue-root">
 							<div class="customizer">
-								<div :class="['product-image', 'product-size--' + selectedSize.toString().replace('.', '_')]">
-									<img :src="'../../../assets/'+selectedColor+'.jpg'" alt="" />
+								<div v-bind:class="['product-image', sizeClass]">
+									<img src="../../../assets/red.jpg" alt="" />
 								</div>
 								<div class="selectors">
 									<div class="field-group">
 										<label for="size-options">Size:</label>
-										<select name="sizeOptions" id="size-options" v-model="selectedSize" @change="updateColorsBySize">
+										<select name="sizeOptions" id="size-options" v-model="selectedSize" v-on:change="updateColorsBySize">
 											<option v-for="size in sizes">{{ size }}</option>
 										</select>
 									</div>
 									<div class="field-group">
 										<label for="color-options">Color:</label>
-										<select name="colorOptions" id="color-options" v-model="selectedColor" @change="updateSizesByColor">
-											<option v-for="color in colors">{{ color }}</option>
+										<select name="colorOptions" id="color-options">
+											<option>Red</option>
+											<option>Blue</option>
+											<option>Green</option>
+											<option>Brown</option>
 										</select>
 									</div>
 								</div>

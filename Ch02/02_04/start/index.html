@@ -113,26 +113,7 @@
 						<!-- VUE COMPONENTS GO HERE -->
 						<div id="vue-root">
 							<div class="customizer">
-								<div class="product-image">
-									<img src="../../../assets/red.jpg" alt="" />
-								</div>
-								<div class="selectors">
-									<div class="field-group">
-										<label for="size-options">Size:</label>
-										<select name="sizeOptions" id="size-options">
-											<option v-for="size in sizes">{{ size }}</option>
-										</select>
-									</div>
-									<div class="field-group">
-										<label for="color-options">Color:</label>
-										<select name="colorOptions" id="color-options">
-											<option>Red</option>
-											<option>Blue</option>
-											<option>Green</option>
-											<option>Brown</option>
-										</select>
-									</div>
-								</div>
+ 								{{ message }}
 							</div>
 						</div>
 					</div>
@@ -226,8 +207,6 @@
 
 <script src="../../../assets/ch02-all.js"></script>
 <script type='text/javascript' src='../../../hplussport.com/wp-content/themes/radcliffe/js/global3428.js?ver=4.5.2'></script>
-
-
 
 <!--
 Polyfills for older browsers
