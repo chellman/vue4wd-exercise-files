@@ -43,17 +43,14 @@
     props: ["people"],
     template:
       '<div class="results"> \
-      <transition-group name="fade"> \
-      <div class="person" v-for="person in people" :key="person.id"> \
+      <div class="person" v-for="person in people"> \
       <h3>{{ person.name }}, {{ person.title }}</h3> \
       <p> \
       <img class="size-medium alignright" :src="person.img" :alt="person.name" \
       width="300" height="300" sizes="(max-width: 300px) 100vw, 300px" /> \
       {{ person.bio }} \
       </p> \
-      </div>\
-      </transition-group> \
-      </div>'
+      </div></div>'
   });
 
   var Directory = new Vue({

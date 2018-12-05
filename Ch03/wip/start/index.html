@@ -9,6 +9,7 @@
 <script src="http://leafandmortar.com/wp-content/themes/kage-green/js/html5.js"></script>
 <![endif]-->
 	<style type="text/css">
+		@import url(../../../assets/animate.css);
 		@import url(../../../leafandmortar.com/wp-content/plugins/contact-form-7/includes/css/styles5859.css);
         @import url(../../../leafandmortar.com/wp-content/plugins/wpdiy/wpdiy-styles7bcd.css);
         @import url(../../../leafandmortar.com/wp-content/plugins/wpdiy/icons/style7bcd.css);
@@ -112,7 +113,17 @@
 					<div class="gutter">
 						<article class="singlepost clearfix">
 
-							<div id="directory-root"></div>
+							<div id="directory-root">
+								<div class="company-directory">
+									<h2>
+										Company Directory
+									</h2>
+									<p>Learn more about each person at Leaf & Mortar in this company directory.</p>
+
+									<directory-filters @filter-people="updatePeopleList"></directory-filters>
+									<directory-people :people="people"></directory-people>
+								</div>
+							</div>
 
 							<div class="clear">&nbsp;</div>
 						</article>
@@ -271,16 +282,12 @@
 
 <!--
 Polyfills for older browsers
-@see https://reactjs.org/docs/javascript-environment-requirements.html
-<script crossorigin src="https://unpkg.com/core-js@2.5.1/client/shim.min.js"></script>
-<script>window.core || document.write('<script crossorigin src="../../../node_modules/core-js/client/shim.min.js"><\/script>')</script>
-<script src="../../../assets/polyfills/raf-3.4.0-polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<script>window.Promise || document.write('<script src="../../../node_modules/es6-promise/dist/es6-promise.auto.min.js"><\/script>')</script>
 -->
 
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script>window.React || document.write('<script crossorigin src="../../../node_modules/react/umd/react.development.js"><\/script>')</script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-<script>window.ReactDOM || document.write('<script crossorigin src="../../../node_modules/react-dom/umd/react-dom.development.js"><\/script>')</script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>window.Vue || document.write('<script src="../../../node_modules/vue/dist/vue.js"><\/script>')</script>
 
 <script src="../../../assets/ch03-data.js"></script>
 <script src="directory.js"></script>

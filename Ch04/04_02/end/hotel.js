@@ -3,7 +3,7 @@
 
   // obvs want to update this!
   var CONFIG = {
-    apiUrl: "http://localhost/reactjs/status_api",
+    apiUrl: "http://localhost/status_api",
 
     messageTypes: {
       management: "Management",
