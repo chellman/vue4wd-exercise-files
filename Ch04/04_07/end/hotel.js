@@ -40,7 +40,7 @@
 
             if (response.data.success) {
               // Message received on the server - update our UI
-              this.$emit('add-message', newStatus);
+              this.$emit("add-message", newStatus);
             }
           }.bind(this)
         );
@@ -88,15 +88,18 @@
               <span class="time">{{ timeFormatted(message.time) }}</span>
             </li>
           </ul>
-          <vue-simple-spinner line-size="5" message="Loading…" text-fg-color="white" v-else></vue-simple-spinner>
+          <vue-simple-spinner :line-size="5" message="Loading…" text-fg-color="white" v-else></vue-simple-spinner>
           </div>
         </div>`,
-      methods: { timeFormatted: function(time) {
+    methods: {
+      timeFormatted: function(time) {
         var statusDate = date.parse(time, "YYYY-MM-DD, HH:mm"),
           dateFormat = "M/D/Y, h:mm A";
 
         return date.format(statusDate, dateFormat);
-      } } });
+      }
+    }
+  });
 
   var StatusUpdates = new Vue({
     el: "#vue-statusmanager",
@@ -113,10 +116,12 @@
       retrieveStatusMessages: function() {
         axios
           .get(CONFIG.apiUrl + "/get.php?delay=1")
-          .then(function(response) {
-            this.messages = response.data;
-            this.loaded = true;
-          }.bind(this))
+          .then(
+            function(response) {
+              this.messages = response.data;
+              this.loaded = true;
+            }.bind(this)
+          )
           .catch(function(error) {
             console.log("retrieveStatusMessages failed", error.toString());
           });
