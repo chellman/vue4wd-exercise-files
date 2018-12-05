@@ -48,7 +48,7 @@
           <h2>Status Updates</h2>
 
           <div id="vue-statusmanager">
-            <post-status-form></post-status-form>
+            <post-status-form @add-message="addMessage"></post-status-form>
             <post-status-messages :messages="messages" :loaded="loaded"></post-status-messages>
           </div>
         </div><!-- content -->
@@ -94,6 +94,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>window.Vue || document.write('<script src="../../../node_modules/vue/dist/vue.js"><\/script>')</script>
+
+  <script src="https://unpkg.com/vue-simple-spinner@1.2.8/dist/vue-simple-spinner.min.js"></script>
+  <script>window.Vue.component('vue-simple-spinner') || document.write('<script src="../../../node_modules/vue-simple-spinner/dist/vue-simple-spinner.min.js"><\/script>')</script>  
 
   <script src="hotel.js"></script>
 </body>

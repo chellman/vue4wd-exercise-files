@@ -25,7 +25,7 @@
     },
     template:
       '<div id="post-status"> \
-          <form> \
+          <form @submit="postUpdate"> \
               <h3>Post an Update</h3> \
               <div class="field-group"> \
                 <label for="txt-message">Message</label> \
@@ -41,7 +41,27 @@
                 <input type="submit" value="Post Update"> \
               </div> \
             </form> \
-        </div>'
+        </div>',
+    methods: {
+      postUpdate: function(evt) {
+        evt.preventDefault();
+
+        var newStatus = {
+          msg: this.message,
+          type: this.type,
+          time: date.format(new Date(), "YYYY-MM-DD, HH:mm")
+        };
+
+        axios.post(CONFIG.apiUrl + "/post.php", newStatus).then(
+          function(response) {
+            if (response.data.success) {
+              // Message received by the API - update our UI
+              this.$emit("add-message", newStatus);
+            }
+          }.bind(this)
+        );
+      }
+    }
   });
 
   Vue.component("post-status-messages", {
@@ -60,14 +80,7 @@
               <span class="time">{{ timeFormatted(message.time) }}</span> \
             </li> \
           </ul> \
-          <div class="loading" v-else> \
-            Loading... \
-            <div class="spinner"> \
-              <div class="bounce1"></div> \
-              <div class="bounce2"></div> \
-              <div class="bounce3"></div> \
-            </div> \
-          </div> \
+          <vue-simple-spinner message="Loading…" :line-size="5" text-fg-color="white" v-else></vue-simple-spinner> \
         </div>',
     methods: {
       timeFormatted: function(time) {
@@ -91,7 +104,7 @@
     methods: {
       retrieveStatusMessages: function() {
         axios
-          .get(CONFIG.apiUrl + "/get.php?delay=1")
+          .get(CONFIG.apiUrl + "/get.php?delay=3")
           .then(
             function(response) {
               this.messages = response.data;
@@ -101,6 +114,11 @@
           .catch(function(error) {
             console.error("retrieveStatusMessages failed", error.toString());
           });
+      },
+
+      addMessage: function(newStatus) {
+        // this.retrieveStatusMessages();
+        this.messages.push(newStatus);
       }
     }
   });

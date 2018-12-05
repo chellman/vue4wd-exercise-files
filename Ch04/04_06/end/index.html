@@ -48,7 +48,7 @@
           <h2>Status Updates</h2>
 
           <div id="vue-statusmanager">
-            <post-status-form v-on:add-message="addMessage"></post-status-form>
+            <post-status-form @add-message="addMessage"></post-status-form>
             <post-status-messages :messages="messages" :loaded="loaded"></post-status-messages>
           </div>
         </div><!-- content -->

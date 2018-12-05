@@ -3,7 +3,7 @@
 
   // obvs want to update this!
   var CONFIG = {
-    apiUrl: "http://localhost/reactjs/status_api",
+    apiUrl: "http://localhost/status_api",
 
     messageTypes: {
       management: "Management",
@@ -23,7 +23,25 @@
         type: Object.keys(CONFIG.messageTypes)[0]
       };
     },
-
+    template:
+      '<div id="post-status"> \
+          <form @submit="postUpdate"> \
+              <h3>Post an Update</h3> \
+              <div class="field-group"> \
+                <label for="txt-message">Message</label> \
+                <textarea id="txt-message" rows="2" v-model="message"></textarea> \
+              </div> \
+              <div class="field-group"> \
+                <label for="txt-type">Type</label> \
+                <select id="txt-type" v-model="type"> \
+                    <option v-for="(label, value) in messageTypes" :value="value">{{ label }}</option> \
+                </select> \
+              </div> \
+              <div class="field-group action"> \
+                <input type="submit" value="Post Update"> \
+              </div> \
+            </form> \
+        </div>',
     methods: {
       postUpdate: function(evt) {
         evt.preventDefault();
@@ -36,40 +54,14 @@
 
         axios.post(CONFIG.apiUrl + "/post.php", newStatus).then(
           function(response) {
-            // console.log(response);
-
             if (response.data.success) {
-              // Message received on the server - update our UI
+              // Message received by the API - update our UI
               this.$emit("add-message", newStatus);
             }
           }.bind(this)
         );
       }
-    },
-
-    template: `
-<div id="post-status">
-<form @submit="this.postUpdate">
-              <h3>Post an Update</h3>
-
-              <div class="field-group">
-                <label for="txt-message">Message</label>
-                <textarea id="txt-message" rows="2" v-model="message"></textarea>
-              </div>
-
-              <div class="field-group">
-                <label for="txt-type">Type</label>
-                <select id="txt-type" v-model="type">
-                    <option v-for="(label, value) in messageTypes" :value="value">{{ label }}</option>
-                </select>
-              </div>
-
-              <div class="field-group action">
-                <input type="submit" value="Post Update">
-              </div>
-
-            </form>
-</div>`
+    }
   });
 
   Vue.component("post-status-messages", {
@@ -79,18 +71,17 @@
       };
     },
     props: ["messages", "loaded"],
-    template: `
-       <div id="status-list">
-         <ul class="messages" v-if="loaded">
-            <li v-for="message in messages">
-              {{ message.msg }}
-              <span class="name">— {{ messageTypes[message.type] }}</span>
-              <span class="time">{{ timeFormatted(message.time) }}</span>
-            </li>
-          </ul>
-          <vue-simple-spinner :line-size="5" message="Loading…" text-fg-color="white" v-else></vue-simple-spinner>
-          </div>
-        </div>`,
+    template:
+      '<div id="status-list"> \
+          <ul class="messages" v-if="loaded"> \
+            <li v-for="message in messages"> \
+              {{ message.msg }} \
+              <span class="name">— {{ messageTypes[message.type] }}</span> \
+              <span class="time">{{ timeFormatted(message.time) }}</span> \
+            </li> \
+          </ul> \
+          <vue-simple-spinner message="Loading…" :line-size="5" text-fg-color="white" v-else></vue-simple-spinner> \
+        </div>',
     methods: {
       timeFormatted: function(time) {
         var statusDate = date.parse(time, "YYYY-MM-DD, HH:mm"),
@@ -107,15 +98,13 @@
       messages: [],
       loaded: false
     },
-
     created: function() {
       this.retrieveStatusMessages();
     },
-
     methods: {
       retrieveStatusMessages: function() {
         axios
-          .get(CONFIG.apiUrl + "/get.php?delay=1")
+          .get(CONFIG.apiUrl + "/get.php?delay=3")
           .then(
             function(response) {
               this.messages = response.data;
@@ -123,7 +112,7 @@
             }.bind(this)
           )
           .catch(function(error) {
-            console.log("retrieveStatusMessages failed", error.toString());
+            console.error("retrieveStatusMessages failed", error.toString());
           });
       },
 
