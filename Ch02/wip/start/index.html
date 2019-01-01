@@ -111,27 +111,7 @@
                     <p>Run faster, jump higher.</p>
 
 					<!-- VUE COMPONENTS GO HERE -->
-					<div id="vue-root">
-						<div class="customizer">
-							<div :class="['product-image', sizeClass]">
-								<img :src="sizeSrc" alt="" />
-							</div>
-							<div class="selectors">
-								<div class="field-group">
-									<label for="size-options">Size:</label>
-									<select name="sizeOptions" id="size-options" v-model="selectedSize" @change="updateColorsBySize">
-										<option v-for="size in sizes">{{ size }}</option>
-									</select>
-								</div>
-								<div class="field-group">
-									<label for="color-options">Color:</label>
-									<select name="colorOptions" id="color-options" v-model="selectedColor" @change="updateSizesByColor">
-										<option v-for="color in colors">{{ color }}</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div id="vue-root"></div>
                 </div>
 
                 </form>
@@ -224,16 +204,6 @@
 <script src="../../../assets/ch02-all.js"></script>
 <script type='text/javascript' src='../../../hplussport.com/wp-content/themes/radcliffe/js/global3428.js?ver=4.5.2'></script>
 
-<!--
-Polyfills for older browsers
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-<script>window.Promise || document.write('<script src="../../../node_modules/es6-promise/dist/es6-promise.auto.min.js"><\/script>')</script>
--->
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>window.Vue || document.write('<script src="../../../node_modules/vue/dist/vue.js"><\/script>')</script>
-
-<script src="../../../assets/ch02-inventory.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
