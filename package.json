@@ -8,10 +8,9 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18",
-    "babel-standalone": "^6.26.0",
     "date-and-time": "^0.6.3",
     "es6-promise": "4",
-    "vue": "^2.5.17",
+    "vue": "^2.5.21",
     "vue-simple-spinner": "^1.2.8"
   },
   "devDependencies": {
