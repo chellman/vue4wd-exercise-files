@@ -23,29 +23,25 @@
         type: Object.keys(CONFIG.messageTypes)[0]
       };
     },
-    template: `
-<div id="post-status">
-<form>
-              <h3>Post an Update</h3>
-
-              <div class="field-group">
-                <label for="txt-message">Message</label>
-                <textarea id="txt-message" rows="2" v-model="message"></textarea>
-              </div>
-
-              <div class="field-group">
-                <label for="txt-type">Type</label>
-                <select id="txt-type" v-model="type">
-                    <option v-for="(label, value) in messageTypes" :value="value">{{ label }}</option>
-                </select>
-              </div>
-
-              <div class="field-group action">
-                <input type="submit" value="Post Update">
-              </div>
-
-            </form>
-</div>`
+    template:
+      '<div id="post-status"> \
+          <form> \
+              <h3>Post an Update</h3> \
+              <div class="field-group"> \
+                <label for="txt-message">Message</label> \
+                <textarea id="txt-message" rows="2" v-model="message"></textarea> \
+              </div> \
+              <div class="field-group"> \
+                <label for="txt-type">Type</label> \
+                <select id="txt-type" v-model="type"> \
+                    <option v-for="(label, value) in messageTypes" :value="value">{{ label }}</option> \
+                </select> \
+              </div> \
+              <div class="field-group action"> \
+                <input type="submit" value="Post Update"> \
+              </div> \
+            </form> \
+        </div>'
   });
 
   Vue.component("post-status-messages", {
@@ -55,15 +51,16 @@
       };
     },
     props: ["messages"],
-    template: `<div id="status-list">
-          <ul class="messages">
-            <li v-for="message in messages">
-              {{ message.msg }}
-              <span class="name">— {{ messageTypes[message.type] }}</span>
-              <span class="time">{{ timeFormatted(message.time) }}</span>
-            </li>
-          </ul>
-        </div>`,
+    template:
+      '<div id="status-list"> \
+          <ul class="messages"> \
+            <li v-for="message in messages"> \
+              {{ message.msg }} \
+              <span class="name">— {{ messageTypes[message.type] }}</span> \
+              <span class="time">{{ timeFormatted(message.time) }}</span> \
+            </li> \
+          </ul> \
+        </div>',
     methods: {
       timeFormatted: function(time) {
         var statusDate = date.parse(time, "YYYY-MM-DD, HH:mm"),
