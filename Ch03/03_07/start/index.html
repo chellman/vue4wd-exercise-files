@@ -116,7 +116,7 @@
 								<div class="company-directory">
 									<h2>Company Directory</h2>
 									<p>Learn more about each person at Leaf &amp; Mortar in this company directory.</p>
-									<directory-filters></directory-filters>
+									<directory-filters @filter-people="updatePeopleList"></directory-filters>
 
 									<directory-people :people="people"></directory-people>
 								</div>
